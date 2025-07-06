@@ -31,16 +31,11 @@ public class Bst{
 
 
     public static Node createTree(){
-        System.out.println("Enter the value for Node: ");
         int val = sc.nextInt();
-        
         Node root = null;
-        
+
         while(val != -1){
-
             root = buildBST(val, root);
-
-            System.out.println("Enter the value for Node: ");
             val = sc.nextInt();
         }
         return root;
@@ -85,15 +80,37 @@ public class Bst{
     }
 
 
+    public static int minElement(Node root){
+        if(root.left == null){
+            return root.data;
+        }
+        return minElement(root.left);
+    }
+    
+
+    public static int maxElement(Node root){
+        if(root.right == null){
+            return root.data;
+        }
+        return maxElement(root.right);
+    }
+
+
     public static void main(String[] args){
         Node root = createTree();
+        System.out.println("Level Order Traversal:");
         levelOrderTraversal(root);
         System.out.println();
-        preOrderTraversal(root);
-        System.out.println();
-        inOrderTraversal(root);
-        System.out.println();
-        postOrderTraversal(root);
-        System.out.println();
+        // System.out.println("Pre Order Traversal:");
+        // preOrderTraversal(root);
+        // System.out.println();
+        // System.out.println("In Order Traversal:");
+        // inOrderTraversal(root);
+        // System.out.println();
+        // System.out.println("Post Order Traversal:");
+        // postOrderTraversal(root);
+        // System.out.println();
+        System.out.println(minElement(root));
+        System.out.println(maxElement(root));
     }
 }
