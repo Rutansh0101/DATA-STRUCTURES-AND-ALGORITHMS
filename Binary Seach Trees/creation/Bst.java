@@ -30,13 +30,11 @@ public class Bst{
     }
 
 
-    public static Node createTree(){
-        int val = sc.nextInt();
+    public static Node createTree(int[] arr){
+        int index = 0;
         Node root = null;
-
-        while(val != -1){
-            root = buildBST(val, root);
-            val = sc.nextInt();
+        while(index != arr.length){
+            root = buildBST(arr[index++], root);
         }
         return root;
     }
@@ -95,22 +93,50 @@ public class Bst{
         return maxElement(root.right);
     }
 
+    public static boolean searchInBST(Node root, int target){
+        if(root == null)    return false;
+        if(root.data == target)  return true;
+        if(root.data > target)  return searchInBST(root.left, target);
+        return searchInBST(root.right, target);
+    }
+
 
     public static void main(String[] args){
-        Node root = createTree();
+        int[] arr = {100, 50, 200, 20, 70, 150, 250};
+        Node root = createTree(arr);
         System.out.println("Level Order Traversal:");
         levelOrderTraversal(root);
         System.out.println();
+        
+        
+        
         // System.out.println("Pre Order Traversal:");
         // preOrderTraversal(root);
         // System.out.println();
+        
+        
+        
         // System.out.println("In Order Traversal:");
         // inOrderTraversal(root);
         // System.out.println();
+        
+        
+        
         // System.out.println("Post Order Traversal:");
         // postOrderTraversal(root);
         // System.out.println();
-        System.out.println(minElement(root));
-        System.out.println(maxElement(root));
+
+
+
+        // System.out.println(minElement(root));
+        // System.out.println(maxElement(root));
+
+
+        // Element searching in BST:
+        System.out.println(searchInBST(root, 250));
+
+
+
+        
     }
 }
