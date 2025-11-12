@@ -38,6 +38,29 @@ class Graph {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
     }
+
+    public List<Integer> BFSTraversal(int src) {
+        List<Integer> ans = new ArrayList<>();
+        
+        Queue<Integer> queue = new LinkedList<>();
+        HashMap<Integer, Boolean> visited = new HashMap<>();
+
+        queue.offer(src);
+        visited.put(src, true);
+
+        while(!queue.isEmpty()) {
+            int frontNode = queue.poll();
+            ans.add(frontNode);
+            for(int Node : adjList.getOrDefault(frontNode, new ArrayList<>())) {
+                if(!visited.getOrDefault(Node, false)) {
+                    queue.offer(Node);
+                    visited.put(Node, true);
+                }
+            }
+        }
+        
+        return ans;
+    }
 }
 
 
@@ -86,13 +109,29 @@ public class Main {
         // g.printAdjList();
 
 
-        WeightedGraph wg = new WeightedGraph();
-        wg.addEdge(0, 1, 4, true);
-        wg.addEdge(0, 2, 2, true);
-        wg.addEdge(1, 2, 3, true);
-        wg.addEdge(3, 1, 5, true);
-        wg.addEdge(2, 3, 1, true);
+        // WeightedGraph wg = new WeightedGraph();
+        // wg.addEdge(0, 1, 4, true);
+        // wg.addEdge(0, 2, 2, true);
+        // wg.addEdge(1, 2, 3, true);
+        // wg.addEdge(3, 1, 5, true);
+        // wg.addEdge(2, 3, 1, true);
 
-        wg.printAdjList();
+        // wg.printAdjList();
+
+
+        // BFS traversal:
+        Graph g = new Graph();
+        g.addEdge(0, 3, true);
+        g.addEdge(0, 5, true);
+        g.addEdge(0, 2, true);
+        g.addEdge(2, 5, true);
+        g.addEdge(3, 5, true);
+        g.addEdge(5, 4, true);
+        g.addEdge(5, 6, true);
+        g.addEdge(6, 1, true);
+        g.addEdge(4, 1, true);
+
+        List<Integer> bfs = g.BFSTraversal(0);
+        System.out.println(bfs);
     }
 }
